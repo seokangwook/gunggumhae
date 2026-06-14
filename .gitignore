@@ -13,4 +13,9 @@ yarn-error.log*
 .env.local
 .vercel
 *.tsbuildinfo
+_push_*.py
+_push_*.sh
+_register_*.py
+_run_*.py
+_setup_*.py
 next-env.d.ts
