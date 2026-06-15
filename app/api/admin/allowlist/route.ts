@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { createSupabaseServerClient, createSupabaseAdminClient } from '@/lib/supabase/server';
 import { isAdminEmail } from '@/lib/utils';
 
 export async function POST(req: Request) {
@@ -17,7 +17,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'user_id가 필요합니다.' }, { status: 400 });
   }
 
-  const { error } = await supabase.from('gunggumhae_allowlist').upsert({
+  const admin = await createSupabaseAdminClient();
+  const { error } = await admin.from('gunggumhae_allowlist').upsert({
     user_id,
     added_by: user.id,
     notes: notes ?? null,
@@ -46,7 +47,8 @@ export async function DELETE(req: Request) {
     return NextResponse.json({ error: 'user_id가 필요합니다.' }, { status: 400 });
   }
 
-  const { error } = await supabase
+  const admin = await createSupabaseAdminClient();
+  const { error } = await admin
     .from('gunggumhae_allowlist')
     .delete()
     .eq('user_id', userId);
