@@ -19,3 +19,4 @@ _register_*.py
 _run_*.py
 _setup_*.py
 next-env.d.ts
+_check_deploy*.py
